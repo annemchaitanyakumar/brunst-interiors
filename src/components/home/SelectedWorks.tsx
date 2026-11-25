@@ -19,16 +19,22 @@ export function SelectedWorks() {
 
       <div className="mt-20 grid gap-10 md:grid-cols-3 md:gap-8">
         {PICKS.map((p, i) => (
-          <TransitionLink key={p.slug} to="/projects" data-cursor="view" className={i === 1 ? "md:mt-40" : i === 2 ? "md:mt-16" : ""}>
-            <RevealImage src={p.cover} alt={`${p.title} — ${p.summary}`} className="aspect-[3/4]" from={i === 1 ? "bottom" : "center"} />
-            <div className="mt-5 flex items-baseline justify-between">
-              <h3 className="font-display text-3xl">{p.title}</h3>
-              <span className="text-eyebrow text-muted-foreground">{p.year}</span>
-            </div>
-            <p className="mt-1 text-sm text-muted-foreground">{p.category} · {p.location}</p>
-          </TransitionLink>
+            <TransitionLink
+              key={p.slug}
+              to="/projects"
+              search={{ open: p.slug }}
+              data-cursor="view"
+              className={i === 1 ? "md:mt-40" : i === 2 ? "md:mt-16" : ""}
+            >
+              <RevealImage src={p.cover} alt={`${p.title} — ${p.summary}`} className="aspect-[3/4]" from={i === 1 ? "bottom" : "center"} />
+              <div className="mt-5 flex items-baseline justify-between">
+                <h3 className="font-display text-3xl">{p.title}</h3>
+                <span className="text-eyebrow text-muted-foreground">{p.year}</span>
+              </div>
+              <p className="mt-1 text-sm text-muted-foreground">{p.category} · {p.location}</p>
+            </TransitionLink>
         ))}
-      </div>
+          </div>
     </section>
   );
 }

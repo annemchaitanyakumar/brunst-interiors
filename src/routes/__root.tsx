@@ -20,6 +20,7 @@ import { Grain } from "@/components/site/Grain";
 import { CurtainProvider } from "@/components/site/Curtain";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -41,11 +42,18 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
+  const errorMessage = error instanceof Error ? error.message : typeof error === "string" ? error : "";
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-6">
       <div className="max-w-md text-center">
         <h1 className="text-display-md">This page didn't load</h1>
         <p className="mt-3 text-muted-foreground">Something went wrong on our end. Try again or head back home.</p>
+        {errorMessage ? (
+          <p className="mt-4 rounded bg-destructive/10 px-3 py-2 text-xs font-mono text-destructive">
+            {errorMessage}
+          </p>
+        ) : null}
         <div className="mt-8 flex flex-wrap justify-center gap-6">
           <button
             onClick={() => {
@@ -125,6 +133,7 @@ function RootComponent() {
             <Footer />
             <Cursor />
             <Grain />
+            <Toaster position="bottom-right" />
           </CurtainProvider>
         </SiteProvider>
       </MotionConfig>

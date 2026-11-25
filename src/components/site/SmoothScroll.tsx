@@ -23,6 +23,9 @@ export function SmoothScroll() {
       if (cancelled) return;
       lenis = new LenisCtor({ lerp: 0.085, smoothWheel: true });
       lenisStore.current = lenis;
+      if (document.documentElement.classList.contains("case-study-open")) {
+        lenis.stop();
+      }
       lenis.on("scroll", ScrollTrigger.update);
       gsap.ticker.add(tick);
       gsap.ticker.lagSmoothing(0);

@@ -106,14 +106,16 @@
   .lenis.lenis-smooth {
     scroll-behavior: auto !important;
   }
-  .lenis.lenis-stopped {
-    overflow: hidden;
+  .lenis.lenis-stopped,
+  html.case-study-open,
+  html.case-study-open body {
+    overflow: hidden !important;
   }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   ::selection {
     background: var(--bronze);

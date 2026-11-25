@@ -43,7 +43,7 @@ export function Footer() {
           <div>
             <p className="text-eyebrow mb-4 text-bone/40">Contact</p>
             <a href="mailto:hello@brunstinteriors.com" className="link-underline block w-fit">hello@brunstinteriors.com</a>
-            <a href="tel:+914000000000" className="link-underline mt-1 block w-fit">+91 40 0000 0000</a>
+            <a href="tel:+914048529100" className="link-underline mt-1 block w-fit">+91 40 4852 9100</a>
           </div>
           <div>
             <p className="text-eyebrow mb-4 text-bone/40">Explore</p>
@@ -56,9 +56,9 @@ export function Footer() {
           <div>
             <p className="text-eyebrow mb-4 text-bone/40">Follow</p>
             <ul className="space-y-1">
-              <li><a href="https://instagram.com" target="_blank" rel="noreferrer" className="link-underline">Instagram</a></li>
-              <li><a href="https://pinterest.com" target="_blank" rel="noreferrer" className="link-underline">Pinterest</a></li>
-              <li><a href="https://linkedin.com" target="_blank" rel="noreferrer" className="link-underline">LinkedIn</a></li>
+              <li><a href="https://instagram.com/brunstinteriors" target="_blank" rel="noreferrer" className="link-underline">Instagram</a></li>
+              <li><a href="https://pinterest.com/brunstinteriors" target="_blank" rel="noreferrer" className="link-underline">Pinterest</a></li>
+              <li><a href="https://linkedin.com/company/brunst-interiors" target="_blank" rel="noreferrer" className="link-underline">LinkedIn</a></li>
             </ul>
           </div>
         </div>

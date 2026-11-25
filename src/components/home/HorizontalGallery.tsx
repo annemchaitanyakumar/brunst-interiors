@@ -77,9 +77,10 @@ export function HorizontalGallery() {
             <TransitionLink
               key={p.slug}
               to="/projects"
+              search={{ open: p.slug }}
               data-cursor="view"
               className="group block w-[72vw] shrink-0 md:w-[30vw]"
-              aria-label={`${p.title} — view projects`}
+              aria-label={`${p.title} — open case study`}
             >
               <article data-card>
                 <div className="relative aspect-[3/4] overflow-hidden bg-charcoal-soft">
