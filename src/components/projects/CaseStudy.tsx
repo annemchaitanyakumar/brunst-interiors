@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, transform, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { X, ArrowRight, ArrowLeft } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { lenisStore } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 import { BeforeAfter } from "./BeforeAfter";
 
 const EASE = [0.76, 0, 0.24, 1] as const;
@@ -49,7 +50,7 @@ function Sequence({ project, container }: { project: Project; container: React.R
   const bar = useTransform(scrollYProgress, (v) => v);
 
   return (
-    <div ref={target} className="relative" style={{ height: `${n * 90}vh` }}>
+    <div ref={target} data-cs-dark="true" className="relative" style={{ height: `${n * 90}vh` }}>
       <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden bg-charcoal">
         {project.gallery.map((src, i) => (
           <Frame key={i} src={src} i={i} n={n} progress={scrollYProgress} alt={`${project.title} — view ${i + 1}`} />
@@ -90,6 +91,23 @@ export function CaseStudy({
   onPrev?: (() => void) | undefined;
 }) {
   const scroller = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const [darkBar, setDarkBar] = useState(true);
+
+  const syncBarSurface = useCallback(() => {
+    const root = scroller.current;
+    const bar = barRef.current;
+    if (!root || !bar) return;
+    const barRect = bar.getBoundingClientRect();
+    const sampleY = barRect.height > 0 ? barRect.top + barRect.height * 0.5 : 32;
+    let onDark = false;
+    root.querySelectorAll<HTMLElement>("[data-cs-dark='true']").forEach((el) => {
+      if (onDark) return;
+      const r = el.getBoundingClientRect();
+      if (sampleY >= r.top && sampleY <= r.bottom) onDark = true;
+    });
+    setDarkBar(onDark);
+  }, []);
 
   useEffect(() => {
     lenisStore.current?.stop();
@@ -118,6 +136,7 @@ useEffect(() => {
   } else {
     scroller.current.scrollTop = 0;
   }
+  setDarkBar(true);
 }, [project.slug]);
 
 const simulated = !project.before;
@@ -136,13 +155,22 @@ return (
     <div
       key={project.slug}
       ref={scroller}
+      onScroll={syncBarSurface}
       data-lenis-prevent
       data-case-study-scroll=""
       data-scroll-restoration-id={`case-study-${project.slug}`}
       style={{ overflowAnchor: "none" }}
       className="relative h-full overflow-y-auto overscroll-contain"
     >
-      <div className="sticky top-0 z-20 flex items-center justify-between px-5 py-4 text-bone mix-blend-difference md:px-12 md:py-5">
+      <div
+        ref={barRef}
+        className={cn(
+          "sticky top-0 z-20 flex items-center justify-between px-5 py-4 transition-colors duration-300 md:px-12 md:py-5",
+          darkBar
+            ? "text-bone drop-shadow-[0_1px_10px_rgba(0,0,0,0.3)]"
+            : "border-b border-border/60 bg-bone/85 text-charcoal backdrop-blur-md",
+        )}
+      >
         <div className="flex items-center gap-3 md:gap-4">
           <span className="text-eyebrow">
             {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
@@ -155,7 +183,10 @@ return (
                 onClick={onPrev}
                 data-cursor="hover"
                 aria-label="Previous project"
-                className="rounded-full border border-bone/30 p-1.5 transition-colors hover:border-bone"
+                className={cn(
+                  "rounded-full border p-1.5 transition-colors",
+                  darkBar ? "border-bone/35 hover:border-bone" : "border-charcoal/25 hover:border-charcoal",
+                )}
               >
                 <ArrowLeft className="h-3.5 w-3.5" />
               </button>
@@ -164,7 +195,10 @@ return (
                 onClick={onNext}
                 data-cursor="hover"
                 aria-label="Next project"
-                className="rounded-full border border-bone/30 p-1.5 transition-colors hover:border-bone"
+                className={cn(
+                  "rounded-full border p-1.5 transition-colors",
+                  darkBar ? "border-bone/35 hover:border-bone" : "border-charcoal/25 hover:border-charcoal",
+                )}
               >
                 <ArrowRight className="h-3.5 w-3.5" />
               </button>
@@ -176,7 +210,7 @@ return (
         </button>
       </div>
 
-      <section className="relative -mt-[68px] h-[100svh] overflow-hidden">
+      <section data-cs-dark="true" className="relative -mt-[68px] h-[100svh] overflow-hidden">
         <motion.img
           key={project.cover}
           src={project.cover}
@@ -249,6 +283,7 @@ return (
 
       <button
         type="button"
+        data-cs-dark="true"
         onClick={(e) => {
           e.currentTarget.blur();
           onNext();

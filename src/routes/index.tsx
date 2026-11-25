@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { buildPageHead } from "@/lib/seo";
 import { Hero } from "@/components/home/Hero";
 import { Philosophy } from "@/components/home/Philosophy";
 import { HorizontalGallery } from "@/components/home/HorizontalGallery";
@@ -7,19 +8,16 @@ import { ServicesMarquee } from "@/components/home/ServicesMarquee";
 import { SelectedWorks } from "@/components/home/SelectedWorks";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Brunst Interiors — Spaces That Tell Stories" },
-      {
-        name: "description",
-        content: "Luxury interior design studio in Hyderabad crafting cinematic homes, hotels and boutiques. Explore our portfolio.",
-      },
-      { property: "og:title", content: "Brunst Interiors — Spaces That Tell Stories" },
-      { property: "og:description", content: "Cinematic luxury interiors for homes, hotels and boutiques. Explore the portfolio." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    buildPageHead({
+      title: "Brunst Interiors — Spaces That Tell Stories",
+      description:
+        "Luxury interior architecture & design studio in Hyderabad crafting bespoke villas, residences, boutique hotels, and ateliers built around natural light and honest materials.",
+      path: "/",
+      keywords:
+        "luxury interior design Hyderabad, Brunst Interiors, residential interior architecture, travertine interiors, bespoke joinery India",
+      imageAlt: "Brunst Interiors — Luxury architectural living room crafted in travertine and smoked oak",
+    }),
   component: Index,
 });
 

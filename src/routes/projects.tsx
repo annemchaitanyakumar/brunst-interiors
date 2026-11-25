@@ -5,8 +5,10 @@ import { CATEGORIES, PROJECTS, filterProjects, type Filter } from "@/data/projec
 import { useSite } from "@/components/site/site-context";
 import { WordReveal } from "@/components/site/text";
 import { DistortCard } from "@/components/projects/DistortCard";
+import { buildPageHead, SITE_URL } from "@/lib/seo";
 import { ScrollTrigger } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+import heroLiving from "@/assets/hero-living.webp";
 
 const CaseStudy = lazy(() => import("@/components/projects/CaseStudy").then((m) => ({ default: m.CaseStudy })));
 
@@ -14,16 +16,24 @@ export const Route = createFileRoute("/projects")({
   validateSearch: (search: Record<string, unknown>): { open?: string | undefined } => ({
     open: typeof search["open"] === "string" ? (search["open"] as string) : undefined,
   }),
-  head: () => ({
-    meta: [
-      { title: "Projects — Brunst Interiors" },
-      { name: "description", content: "Residential, commercial, styling and renovation projects by Brunst Interiors, Hyderabad." },
-      { property: "og:title", content: "Projects — Brunst Interiors" },
-      { property: "og:description", content: "Explore homes, hotels and boutiques designed by Brunst Interiors." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    buildPageHead({
+      title: "Selected Works & Portfolio — Brunst Interiors",
+      description:
+        "Explore residential homes, boutique hotels, commercial spaces, and before-and-after architectural renovations designed by Brunst Interiors across Hyderabad, Mumbai, Goa, and Bengaluru.",
+      path: "/projects",
+      keywords:
+        "interior design portfolio Hyderabad, residential interior projects, boutique hotel interiors, architectural renovation case studies",
+      image: heroLiving,
+      imageAlt: "Maison Lumière living room project by Brunst Interiors",
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "Selected Works & Portfolio — Brunst Interiors",
+        url: `${SITE_URL}/projects`,
+        description: "Curated residential, commercial, styling, and renovation case studies by Brunst Interiors.",
+      },
+    }),
   component: ProjectsPage,
 });
 

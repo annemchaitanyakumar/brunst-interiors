@@ -20,7 +20,7 @@ export function Footer() {
   });
 
   return (
-    <footer ref={ref} className="relative overflow-hidden bg-charcoal text-bone">
+    <footer ref={ref} data-nav-surface="dark" className="relative overflow-hidden bg-charcoal text-bone">
       <div data-footer-inner className="px-6 pb-8 pt-16 md:px-12 md:pt-40">
         <p className="text-eyebrow text-bronze">Begin a project</p>
         <RevealText

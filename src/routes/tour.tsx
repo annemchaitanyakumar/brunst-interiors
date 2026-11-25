@@ -6,30 +6,26 @@ import { TOUR_STOPS } from "@/data/tour-rooms";
 import { lenisStore } from "@/lib/motion";
 import { TransitionLink } from "@/components/site/Curtain";
 import { PillLink } from "@/components/site/PillButton";
+import { buildPageHead } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+import roomLobby from "@/assets/room-lobby.webp";
 
 const HouseWalkthrough3D = lazy(() =>
   import("@/components/tour/HouseWalkthrough3D").then((m) => ({ default: m.HouseWalkthrough3D })),
 );
 
 export const Route = createFileRoute("/tour")({
-  head: () => ({
-    meta: [
-      { title: "3D House Tour — Brunst Interiors" },
-      {
-        name: "description",
-        content:
-          "Walk through a realistic modern 3D villa — living salon, travertine kitchen, dusk dining room, bedroom, spa bath, library, and sky balcony.",
-      },
-      { property: "og:title", content: "3D House Tour — Brunst Interiors" },
-      {
-        property: "og:description",
-        content: "Scroll through each room of a modern architectural home crafted by Brunst Interiors.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    buildPageHead({
+      title: "Interactive 3D Villa Walkthrough — Brunst Interiors",
+      description:
+        "Walk room by room through a custom 3D modern villa crafted by Brunst Interiors — living salon, travertine kitchen, dusk dining room, primary bedroom suite, skylit spa bath, library, and sky terrace.",
+      path: "/tour",
+      keywords:
+        "3D virtual home tour interior design, interactive 3D architecture walkthrough, modern villa interior visualization",
+      image: roomLobby,
+      imageAlt: "Interactive 3D modern residence tour by Brunst Interiors",
+    }),
   component: TourPage,
 });
 
@@ -99,7 +95,7 @@ function TourPage() {
   const hasNext = activeIdx < TOUR_STOPS.length - 1;
 
   return (
-    <div ref={runwayRef} className="relative bg-charcoal text-bone" style={{ height: "2400vh" }}>
+    <div ref={runwayRef} data-nav-surface="dark" className="relative bg-charcoal text-bone" style={{ height: "2400vh" }}>
       <div className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-charcoal">
         {/* 3D WebGL House Canvas or Editorial Fallback */}
         {mounted && !webglUnsupported ? (
@@ -137,7 +133,7 @@ function TourPage() {
         </div>
 
         {/* DESKTOP (lg+): Top-right Hint + Cinema View Toggle — untouched layout */}
-        <div className="absolute right-12 top-24 z-30 hidden items-center gap-3 lg:flex">
+        <div className="absolute right-12 top-28 z-30 hidden items-center gap-3 lg:flex">
           <span className="rounded-full border border-bone/15 bg-charcoal/85 px-3 py-1.5 text-[10px] uppercase tracking-widest text-bone/75">
             Drag to look · Scroll to walk
           </span>
@@ -154,7 +150,7 @@ function TourPage() {
 
         {/* MOBILE/TABLET (< lg): Non-overlapping Top Horizontal Room Switcher Pills */}
         {!hideHud && (
-          <div className="no-scrollbar absolute inset-x-0 top-[68px] z-20 flex gap-1.5 overflow-x-auto px-4 pb-2 md:top-20 md:px-8 lg:hidden">
+          <div className="no-scrollbar absolute inset-x-0 top-[78px] z-20 flex gap-1.5 overflow-x-auto px-4 pb-2 md:top-[92px] md:px-8 lg:hidden">
             {TOUR_STOPS.map((item, idx) => (
               <button
                 key={item.id}

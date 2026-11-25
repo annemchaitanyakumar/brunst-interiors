@@ -5,7 +5,9 @@ import { useSite } from "@/components/site/site-context";
 import { WordReveal, RevealText } from "@/components/site/text";
 import { RevealImage } from "@/components/site/media";
 import { PillLink } from "@/components/site/PillButton";
+import { TransitionLink } from "@/components/site/Curtain";
 import { MaterialAtelier } from "@/components/studio/MaterialAtelier";
+import { buildPageHead, SITE_URL } from "@/lib/seo";
 
 import founderImg from "@/assets/founder.webp";
 import team1Img from "@/assets/team-1.webp";
@@ -15,22 +17,25 @@ import materialsImg from "@/assets/detail-materials.webp";
 import livingImg from "@/assets/hero-living.webp";
 
 export const Route = createFileRoute("/studio")({
-  head: () => ({
-    meta: [
-      { title: "Studio — Brunst Interiors" },
-      {
-        name: "description",
-        content: "Discover the design philosophy, team, and materials library of Brunst Interiors in Hyderabad.",
+  head: () =>
+    buildPageHead({
+      title: "Our Studio & Materials Atelier — Brunst Interiors",
+      description:
+        "Founded in Hyderabad in 2008 by Elena Brunst. Explore our architectural philosophy, four-phase design process, senior leadership team, and interactive material & daylight atelier.",
+      path: "/studio",
+      keywords:
+        "Brunst Interiors studio Hyderabad, Elena Brunst interior designer, architectural materials library travertine limewash",
+      image: materialsImg,
+      imageAlt: "Brunst Interiors architectural materials atelier in Hyderabad",
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        name: "Our Studio & Materials Atelier — Brunst Interiors",
+        url: `${SITE_URL}/studio`,
+        description:
+          "Interior design and architecture studio founded in 2008 in K.P.H.B Colony, Hyderabad.",
       },
-      { property: "og:title", content: "Studio — Brunst Interiors" },
-      {
-        property: "og:description",
-        content: "Interior design studio in Hyderabad crafting residential and commercial spaces since 2008.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+    }),
   component: StudioPage,
 });
 
@@ -149,29 +154,28 @@ function StudioPage() {
       {/* Hero Section */}
       <section className="px-6 pb-14 pt-28 md:px-12 md:pb-28 md:pt-52">
         <div className="max-w-6xl">
-          <p className="text-eyebrow text-bronze">(01) — Studio</p>
-          <h1 className="text-display-xl mt-4 md:mt-6">
-            <WordReveal text="Crafted in" play={ready} />
-            <br />
-            <WordReveal text="Light & Silence." play={ready} delay={0.15} className="italic text-bronze" />
-          </h1>
-          <motion.div
-            className="mt-8 grid gap-6 md:mt-12 md:grid-cols-12 md:gap-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={ready ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1, delay: 0.4 }}
-          >
-            <p className="text-base leading-relaxed text-muted-foreground md:col-span-7 md:text-xl">
-              Founded in Hyderabad in 2008, Brunst Interiors designs homes, hotels, and boutiques built to age gracefully.
-              We compose rooms around natural light, tactile materials, and the daily routines of the people inside.
-            </p>
-            <div className="flex flex-col justify-end md:col-span-5">
-              <p className="text-sm leading-relaxed text-stone">
-                From our studio in K.P.H.B Colony, we take on residential and commercial projects across Hyderabad,
-                Mumbai, Goa, and Bengaluru.
+            <h1 className="text-display-xl">
+              <WordReveal text="Crafted in" play={ready} />
+              <br />
+              <WordReveal text="Light & Silence." play={ready} delay={0.15} className="italic text-bronze" />
+            </h1>
+            <motion.div
+              className="mt-8 grid gap-6 md:mt-12 md:grid-cols-12 md:gap-16"
+              initial={{ opacity: 0, y: 30 }}
+              animate={ready ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1, delay: 0.4 }}
+            >
+              <p className="text-base leading-relaxed text-muted-foreground md:col-span-7 md:text-xl">
+                Founded in Hyderabad in 2008, Brunst Interiors designs homes, hotels, and boutiques built to age gracefully.
+                We compose rooms around natural light, tactile materials, and the daily routines of the people inside.
               </p>
-            </div>
-          </motion.div>
+              <div className="flex flex-col justify-end md:col-span-5">
+                <p className="text-sm leading-relaxed text-stone">
+                  From our studio in K.P.H.B Colony, we take on residential and commercial projects across Hyderabad,
+                  Mumbai, Goa, and Bengaluru.
+                </p>
+              </div>
+            </motion.div>
         </div>
 
         {/* Stats Grid */}
@@ -190,11 +194,10 @@ function StudioPage() {
       <section className="px-6 py-14 md:px-12 md:py-32">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <p className="text-eyebrow text-bronze">(02) — Philosophy</p>
             <RevealText
               as="h2"
               text="We don't decorate rooms. We shape how they feel."
-              className="text-display-md mt-6"
+              className="text-display-md"
             />
             <p className="mt-8 text-base leading-relaxed text-muted-foreground">
               Every project begins with observation — how afternoon light crosses a plaster wall, how sound carries
@@ -214,17 +217,25 @@ function StudioPage() {
           </div>
 
           <div className="flex flex-col gap-8 lg:col-span-7">
-            <RevealImage
-              src={livingImg}
-              alt="Living room designed by Brunst Interiors"
-              className="aspect-[4/3] w-full"
-              from="center"
-              view
-            />
-            <div className="flex justify-between text-xs text-muted-foreground">
-              <span>Maison Lumière · Alibaug</span>
-              <span>Natural evening light</span>
-            </div>
+            <TransitionLink
+              to="/projects"
+              search={{ open: "maison-lumiere" }}
+              className="group block"
+              aria-label="Open case study: Maison Lumière"
+            >
+              <RevealImage
+                src={livingImg}
+                alt="Living room designed by Brunst Interiors"
+                className="aspect-[4/3] w-full"
+                imgClassName="transition-[filter] duration-700 group-hover:brightness-105"
+                from="center"
+                view
+              />
+              <div className="mt-4 flex justify-between text-xs text-muted-foreground transition-colors group-hover:text-charcoal">
+                <span>Maison Lumière · Alibaug</span>
+                <span>Natural evening light</span>
+              </div>
+            </TransitionLink>
           </div>
         </div>
       </section>
@@ -233,11 +244,10 @@ function StudioPage() {
       <section className="bg-bone-deep px-6 py-16 md:px-12 md:py-36">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
-            <p className="text-eyebrow text-bronze">(03) — Process</p>
             <RevealText
               as="h2"
               text="From first sketches to final handover."
-              className="text-display-md mx-auto mt-4 max-w-2xl text-center"
+              className="text-display-md mx-auto max-w-2xl text-center"
             />
             <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-muted-foreground">
               We take on a small number of projects each year so every client works directly with our senior team from concept to completion.
@@ -279,20 +289,26 @@ function StudioPage() {
       <section className="px-6 py-16 md:px-12 md:py-36">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
           <div className="lg:col-span-6">
-            <RevealImage
-              src={materialsImg}
-              alt="Material samples at Brunst Interiors Hyderabad"
-              className="aspect-[4/3] w-full"
-              from="bottom"
-              view
-            />
+            <a
+              href="#material-atelier"
+              className="group block"
+              aria-label="Scroll to interactive material and lighting study"
+            >
+              <RevealImage
+                src={materialsImg}
+                alt="Material samples at Brunst Interiors Hyderabad"
+                className="aspect-[4/3] w-full"
+                imgClassName="transition-[filter] duration-700 group-hover:brightness-105"
+                from="bottom"
+                view
+              />
+            </a>
           </div>
           <div className="lg:col-span-6 lg:pl-8">
-            <p className="text-eyebrow text-bronze">(04) — Materials Library</p>
             <RevealText
               as="h2"
               text="Stone, timber, linen, and hand-finished plaster."
-              className="text-display-md mt-6"
+              className="text-display-md"
             />
             <p className="mt-8 text-base leading-relaxed text-muted-foreground">
               Our K.P.H.B studio houses hundreds of stone samples, limewash tests, hand-loomed linens, and patinated
@@ -326,11 +342,10 @@ function StudioPage() {
       {/* Team */}
       <section className="bg-bone-deep px-6 py-16 md:px-12 md:py-36">
         <div>
-          <p className="text-eyebrow text-bronze">(05) — Team</p>
           <RevealText
             as="h2"
             text="The people behind the studio."
-            className="text-display-lg mt-4 md:mt-6"
+            className="text-display-lg"
           />
           <p className="mt-4 max-w-xl text-sm text-muted-foreground md:mt-6 md:text-base">
             Architects, interior designers, material researchers, and stylists working together on every detail.
@@ -361,19 +376,18 @@ function StudioPage() {
 
       {/* Press */}
       <section className="px-6 py-24 md:px-12 md:py-36">
-        <p className="text-eyebrow text-bronze">(06) — Press</p>
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
-          {PRESS.map((item, idx) => (
-            <blockquote key={idx} className="flex flex-col justify-between border-l-2 border-bronze py-2 pl-6">
-              <p className="font-display text-2xl italic leading-snug text-charcoal md:text-3xl">
-                "{item.quote}"
-              </p>
-              <cite className="text-eyebrow mt-8 block not-italic text-stone">
-                — {item.publication}
-              </cite>
-            </blockquote>
-          ))}
-        </div>
+          <div className="grid gap-8 md:grid-cols-3">
+            {PRESS.map((item, idx) => (
+              <blockquote key={idx} className="flex flex-col justify-between border-l-2 border-bronze py-2 pl-6">
+                <p className="font-display text-2xl italic leading-snug text-charcoal md:text-3xl">
+                  "{item.quote}"
+                </p>
+                <cite className="text-eyebrow mt-8 block not-italic text-stone">
+                  — {item.publication}
+                </cite>
+              </blockquote>
+            ))}
+          </div>
       </section>
 
       {/* Next Step CTA */}

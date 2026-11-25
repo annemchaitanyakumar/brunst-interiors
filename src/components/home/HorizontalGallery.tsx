@@ -60,17 +60,16 @@ export function HorizontalGallery() {
   });
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-charcoal text-bone" aria-label="Featured rooms">
+    <section ref={ref} data-nav-surface="dark" className="relative overflow-hidden bg-charcoal text-bone" aria-label="Featured rooms">
       {/* Mobile-first editorial intro + swipeable snap gallery (< md) */}
       <div className="py-16 md:hidden">
         <div className="px-6">
-          <p className="text-eyebrow text-bronze">(02) — Featured rooms</p>
-          <h2 className="text-display-lg mt-4">
-            Rooms <span className="italic text-bronze-light">in motion.</span>
-          </h2>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-bone/65">
-            Six rooms, six stories. Swipe to explore our curated interior narratives.
-          </p>
+            <h2 className="text-display-lg">
+              Rooms <span className="italic text-bronze-light">in motion.</span>
+            </h2>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-bone/65">
+              Six rooms, six stories. Swipe to explore our curated interior narratives.
+            </p>
         </div>
 
         <div className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2">
@@ -110,7 +109,7 @@ export function HorizontalGallery() {
       <div className="hidden h-[100svh] flex-col justify-center py-16 md:flex">
         <div data-track className="flex w-max items-center gap-10 px-12">
           <div className="flex w-[34vw] shrink-0 flex-col justify-between self-stretch">
-            <p className="text-eyebrow text-bronze">(02) — Featured rooms</p>
+            <div aria-hidden />
             <div>
               <h2 className="text-display-lg">
                 Rooms

@@ -115,15 +115,14 @@ export function MaterialAtelier() {
   const paletteSummary = `${stone.name}, ${timber.name}, ${wall.name} (${light.label})`;
 
   return (
-    <section className="px-6 py-16 md:px-12 md:py-36">
+    <section id="material-atelier" className="px-6 py-16 md:px-12 md:py-36">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end md:gap-6">
           <div>
-            <p className="text-eyebrow text-bronze">(04B) — Interactive Study</p>
             <RevealText
               as="h2"
               text="Pair stone, timber, and daylight."
-              className="text-display-md mt-3 max-w-[16ch] md:mt-4"
+              className="text-display-md max-w-[16ch]"
             />
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">

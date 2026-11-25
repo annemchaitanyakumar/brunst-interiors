@@ -53,7 +53,6 @@ export function ServicesMarquee() {
   return (
     <section ref={ref} className="overflow-hidden border-y border-border py-14 md:py-28" aria-label="Our services">
       <h2 className="sr-only">Services: {SERVICES.join(", ")}</h2>
-      <p className="text-eyebrow mb-6 px-6 text-bronze md:mb-10 md:px-12">(04) — What we do</p>
       <Row />
       <Row reverse />
     </section>
