@@ -266,7 +266,7 @@ export function HouseWalkthrough3D({
     <div className="relative h-full w-full bg-charcoal">
       <div
         ref={mountRef}
-        className="h-full w-full cursor-grab transition-opacity duration-700 active:cursor-grabbing"
+        className="h-full w-full cursor-grab touch-pan-y transition-opacity duration-700 active:cursor-grabbing"
         style={{ opacity: ready ? 1 : 0 }}
         aria-label="Interactive 3D modern house walkthrough"
       />

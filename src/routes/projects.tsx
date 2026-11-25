@@ -102,8 +102,8 @@ const openProjectSlug = useCallback(
 
 return (
   <>
-    <section className="px-6 pb-16 pt-40 md:px-12 md:pt-52">
-      <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
+    <section className="px-6 pb-10 pt-28 md:px-12 md:pb-16 md:pt-52">
+      <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end md:gap-10">
         <h1 className="text-display-xl">
           <WordReveal text="Selected" play={ready} />
           <br />
@@ -131,7 +131,7 @@ return (
       <motion.div
         role="tablist"
         aria-label="Filter projects by category"
-        className="mt-16 flex flex-wrap gap-2 border-t border-border pt-8"
+        className="no-scrollbar mt-10 flex flex-nowrap gap-2 overflow-x-auto border-t border-border pb-2 pt-6 sm:flex-wrap sm:overflow-visible sm:pb-0 md:mt-16 md:pt-8"
         initial={{ opacity: 0, y: 20 }}
         animate={ready ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.8, duration: 1 }}
@@ -146,7 +146,7 @@ return (
               data-cursor="hover"
               onClick={() => setFilter(c)}
               className={cn(
-                "relative rounded-full px-5 py-2.5 text-eyebrow transition-colors duration-500",
+                "relative shrink-0 rounded-full px-4 py-2 text-eyebrow transition-colors duration-500 sm:px-5 sm:py-2.5",
                 filter === c ? "text-bone" : "text-charcoal hover:text-bronze",
               )}
             >
@@ -164,11 +164,11 @@ return (
       </motion.div>
     </section>
 
-    <section className="px-6 pb-32 md:px-12" aria-live="polite">
+    <section className="px-6 pb-20 md:px-12 md:pb-32" aria-live="polite">
       <LayoutGroup id="grid">
         <div className="flex gap-6 md:gap-8">
           {columns.map((col, ci) => (
-            <div key={ci} className={cn("flex flex-1 flex-col gap-14", ci === 1 && "lg:pt-32", ci === 2 && "lg:pt-12")}>
+            <div key={ci} className={cn("flex flex-1 flex-col gap-10 md:gap-14", ci === 1 && "lg:pt-32", ci === 2 && "lg:pt-12")}>
               <AnimatePresence mode="popLayout">
                 {col.map((p) => (
                   <motion.div

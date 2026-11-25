@@ -21,32 +21,32 @@ export function Footer() {
 
   return (
     <footer ref={ref} className="relative overflow-hidden bg-charcoal text-bone">
-      <div data-footer-inner className="px-6 pb-8 pt-28 md:px-12 md:pt-40">
+      <div data-footer-inner className="px-6 pb-8 pt-16 md:px-12 md:pt-40">
         <p className="text-eyebrow text-bronze">Begin a project</p>
         <RevealText
           as="h2"
           text="Let's shape the story your space is waiting to tell."
-          className="text-display-lg mt-6 max-w-[14ch]"
+          className="text-display-lg mt-5 max-w-[14ch] md:mt-6"
         />
-        <div className="mt-12 flex flex-wrap items-center gap-4">
+        <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-12 md:gap-4">
           <PillLink to="/contact" variant="bronze">Start a project</PillLink>
           <PillLink to="/projects" variant="light">Browse the portfolio</PillLink>
         </div>
 
-        <div className="mt-28 grid gap-10 border-t border-bone/15 pt-10 text-sm text-bone/70 sm:grid-cols-2 md:grid-cols-4">
+        <div className="mt-16 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-bone/15 pt-8 text-sm text-bone/70 md:mt-28 md:grid-cols-4 md:gap-10 md:pt-10">
           <div>
-            <p className="text-eyebrow mb-4 text-bone/40">Studio</p>
+            <p className="text-eyebrow mb-3 text-bone/40 md:mb-4">Studio</p>
             <p>K.P.H.B Colony</p>
             <p>Kukatpally, Hyderabad</p>
             <p>Telangana 500072</p>
           </div>
-          <div>
-            <p className="text-eyebrow mb-4 text-bone/40">Contact</p>
-            <a href="mailto:hello@brunstinteriors.com" className="link-underline block w-fit">hello@brunstinteriors.com</a>
+          <div className="min-w-0">
+            <p className="text-eyebrow mb-3 text-bone/40 md:mb-4">Contact</p>
+            <a href="mailto:hello@brunstinteriors.com" className="link-underline block max-w-full truncate">hello@brunstinteriors.com</a>
             <a href="tel:+914048529100" className="link-underline mt-1 block w-fit">+91 40 4852 9100</a>
           </div>
           <div>
-            <p className="text-eyebrow mb-4 text-bone/40">Explore</p>
+            <p className="text-eyebrow mb-3 text-bone/40 md:mb-4">Explore</p>
             <ul className="space-y-1">
               <li><TransitionLink to="/projects" className="link-underline">Projects</TransitionLink></li>
               <li><TransitionLink to="/tour" className="link-underline">3D House Tour</TransitionLink></li>
@@ -55,7 +55,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <p className="text-eyebrow mb-4 text-bone/40">Follow</p>
+            <p className="text-eyebrow mb-3 text-bone/40 md:mb-4">Follow</p>
             <ul className="space-y-1">
               <li><a href="https://instagram.com/brunstinteriors" target="_blank" rel="noreferrer" className="link-underline">Instagram</a></li>
               <li><a href="https://pinterest.com/brunstinteriors" target="_blank" rel="noreferrer" className="link-underline">Pinterest</a></li>

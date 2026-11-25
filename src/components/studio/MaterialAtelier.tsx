@@ -115,15 +115,15 @@ export function MaterialAtelier() {
   const paletteSummary = `${stone.name}, ${timber.name}, ${wall.name} (${light.label})`;
 
   return (
-    <section className="px-6 py-24 md:px-12 md:py-36">
+    <section className="px-6 py-16 md:px-12 md:py-36">
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end md:gap-6">
           <div>
             <p className="text-eyebrow text-bronze">(04B) — Interactive Study</p>
             <RevealText
               as="h2"
               text="Pair stone, timber, and daylight."
-              className="text-display-md mt-4 max-w-[16ch]"
+              className="text-display-md mt-3 max-w-[16ch] md:mt-4"
             />
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
@@ -131,9 +131,9 @@ export function MaterialAtelier() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-12 lg:items-stretch">
-          {/* Interactive Layered Palette Board */}
-          <div className="relative flex min-h-[420px] flex-col justify-between overflow-hidden rounded-xl border border-border p-8 transition-colors duration-700 lg:col-span-6 md:p-10"
+        <div className="mt-10 grid gap-6 md:mt-14 md:gap-10 lg:grid-cols-12 lg:items-stretch">
+          {/* Interactive Layered Palette Board (compact min-h on mobile so swatches remain visible alongside controls) */}
+          <div className="relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-xl border border-border p-5 transition-colors duration-700 sm:min-h-[340px] md:min-h-[420px] md:p-10 lg:col-span-6"
             style={{ backgroundColor: wall.swatch }}
           >
             {/* Simulated light cast */}
@@ -152,7 +152,7 @@ export function MaterialAtelier() {
             </div>
 
             {/* Layered physical swatches */}
-            <div className="relative z-10 my-10 grid grid-cols-12 items-end gap-4">
+            <div className="relative z-10 my-5 grid grid-cols-12 items-end gap-3 md:my-10 md:gap-4">
               {/* Stone Slab */}
               <motion.div
                 layout
@@ -189,13 +189,13 @@ export function MaterialAtelier() {
             </div>
           </div>
 
-          {/* Controls */}
-          <div className="flex flex-col justify-between gap-7 rounded-xl border border-border bg-bone-deep p-7 lg:col-span-6 md:p-9">
-            <div className="space-y-6">
+          {/* Controls — clean horizontal swipe pills on narrow phones so preview stays nearby */}
+          <div className="flex flex-col justify-between gap-6 rounded-xl border border-border bg-bone-deep p-5 sm:p-7 md:gap-7 md:p-9 lg:col-span-6">
+            <div className="space-y-5 md:space-y-6">
               {/* Stone */}
               <div>
-                <p className="text-eyebrow mb-2.5 text-bronze">01 · Stone Slab</p>
-                <div className="grid gap-2 sm:grid-cols-3">
+                <p className="text-eyebrow mb-2 text-bronze md:mb-2.5">01 · Stone Slab</p>
+                <div className="no-scrollbar flex gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0">
                   {STONES.map((s, i) => (
                     <button
                       key={s.id}
@@ -203,7 +203,7 @@ export function MaterialAtelier() {
                       onClick={() => setStoneIdx(i)}
                       data-cursor="hover"
                       className={cn(
-                        "rounded-lg border px-3 py-2.5 text-left transition-colors",
+                        "shrink-0 rounded-lg border px-3 py-2 text-left transition-colors sm:py-2.5",
                         stoneIdx === i
                           ? "border-charcoal bg-charcoal text-bone"
                           : "border-border bg-bone text-charcoal hover:border-bronze",
@@ -220,8 +220,8 @@ export function MaterialAtelier() {
 
               {/* Timber */}
               <div>
-                <p className="text-eyebrow mb-2.5 text-bronze">02 · Joinery Timber</p>
-                <div className="grid gap-2 sm:grid-cols-3">
+                <p className="text-eyebrow mb-2 text-bronze md:mb-2.5">02 · Joinery Timber</p>
+                <div className="no-scrollbar flex gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0">
                   {TIMBERS.map((t, i) => (
                     <button
                       key={t.id}
@@ -229,7 +229,7 @@ export function MaterialAtelier() {
                       onClick={() => setTimberIdx(i)}
                       data-cursor="hover"
                       className={cn(
-                        "rounded-lg border px-3 py-2.5 text-left transition-colors",
+                        "shrink-0 rounded-lg border px-3 py-2 text-left transition-colors sm:py-2.5",
                         timberIdx === i
                           ? "border-charcoal bg-charcoal text-bone"
                           : "border-border bg-bone text-charcoal hover:border-bronze",
@@ -246,8 +246,8 @@ export function MaterialAtelier() {
 
               {/* Wall Finish */}
               <div>
-                <p className="text-eyebrow mb-2.5 text-bronze">03 · Wall Finish</p>
-                <div className="grid gap-2 sm:grid-cols-3">
+                <p className="text-eyebrow mb-2 text-bronze md:mb-2.5">03 · Wall Finish</p>
+                <div className="no-scrollbar flex gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0">
                   {WALLS.map((w, i) => (
                     <button
                       key={w.id}
@@ -255,7 +255,7 @@ export function MaterialAtelier() {
                       onClick={() => setWallIdx(i)}
                       data-cursor="hover"
                       className={cn(
-                        "rounded-lg border px-3 py-2.5 text-left transition-colors",
+                        "shrink-0 rounded-lg border px-3 py-2 text-left transition-colors sm:py-2.5",
                         wallIdx === i
                           ? "border-charcoal bg-charcoal text-bone"
                           : "border-border bg-bone text-charcoal hover:border-bronze",
@@ -272,8 +272,8 @@ export function MaterialAtelier() {
 
               {/* Light Temp */}
               <div>
-                <p className="text-eyebrow mb-2.5 text-bronze">04 · Lighting Study</p>
-                <div className="grid gap-2 sm:grid-cols-3">
+                <p className="text-eyebrow mb-2 text-bronze md:mb-2.5">04 · Lighting Study</p>
+                <div className="no-scrollbar flex gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0">
                   {LIGHTS.map((l, i) => {
                     const Icon = l.icon;
                     return (
@@ -283,7 +283,7 @@ export function MaterialAtelier() {
                         onClick={() => setLightIdx(i)}
                         data-cursor="hover"
                         className={cn(
-                          "flex items-center gap-2 rounded-lg border px-3 py-2.5 text-left text-xs transition-colors",
+                          "flex shrink-0 items-center gap-2 rounded-lg border px-3 py-2 text-left text-xs transition-colors sm:py-2.5",
                           lightIdx === i
                             ? "border-charcoal bg-charcoal text-bone"
                             : "border-border bg-bone text-charcoal hover:border-bronze",

@@ -1,9 +1,9 @@
 import { useId, useRef, useState } from "react";
-import { gsap, prefersReducedMotion } from "@/lib/motion";
+import { canHover, gsap, prefersReducedMotion } from "@/lib/motion";
 import type { Project } from "@/data/projects";
 import { cn } from "@/lib/utils";
 
-/** Project tile with a liquid displacement ripple on hover. */
+/** Project tile with a liquid displacement ripple on hover (desktop pointers only). */
 export function DistortCard({ project, index, onOpen }: { project: Project; index: number; onOpen: () => void }) {
   const id = useId().replace(/:/g, "");
   const filterId = `distort-${id}`;
@@ -13,7 +13,7 @@ export function DistortCard({ project, index, onOpen }: { project: Project; inde
   const tl = useRef<gsap.core.Timeline | null>(null);
 
   const enter = () => {
-    if (prefersReducedMotion() || !dispRef.current || !turbRef.current) return;
+    if (!canHover() || prefersReducedMotion() || !dispRef.current || !turbRef.current) return;
     setActive(true);
     const state = { scale: 0, freq: 0.004 };
     tl.current?.kill();

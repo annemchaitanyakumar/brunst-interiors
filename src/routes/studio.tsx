@@ -147,21 +147,21 @@ function StudioPage() {
   return (
     <main className="bg-bone text-charcoal">
       {/* Hero Section */}
-      <section className="px-6 pb-20 pt-40 md:px-12 md:pb-28 md:pt-52">
+      <section className="px-6 pb-14 pt-28 md:px-12 md:pb-28 md:pt-52">
         <div className="max-w-6xl">
           <p className="text-eyebrow text-bronze">(01) — Studio</p>
-          <h1 className="text-display-xl mt-6">
+          <h1 className="text-display-xl mt-4 md:mt-6">
             <WordReveal text="Crafted in" play={ready} />
             <br />
             <WordReveal text="Light & Silence." play={ready} delay={0.15} className="italic text-bronze" />
           </h1>
           <motion.div
-            className="mt-12 grid gap-10 md:grid-cols-12 md:gap-16"
+            className="mt-8 grid gap-6 md:mt-12 md:grid-cols-12 md:gap-16"
             initial={{ opacity: 0, y: 30 }}
             animate={ready ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, delay: 0.4 }}
           >
-            <p className="text-lg leading-relaxed text-muted-foreground md:col-span-7 md:text-xl">
+            <p className="text-base leading-relaxed text-muted-foreground md:col-span-7 md:text-xl">
               Founded in Hyderabad in 2008, Brunst Interiors designs homes, hotels, and boutiques built to age gracefully.
               We compose rooms around natural light, tactile materials, and the daily routines of the people inside.
             </p>
@@ -175,7 +175,7 @@ function StudioPage() {
         </div>
 
         {/* Stats Grid */}
-        <div className="mt-20 grid grid-cols-2 gap-8 border-y border-border py-12 md:mt-28 md:grid-cols-4">
+        <div className="mt-12 grid grid-cols-2 gap-6 border-y border-border py-8 md:mt-28 md:grid-cols-4 md:gap-8 md:py-12">
           {STATS.map((s, idx) => (
             <div key={idx} className="space-y-2">
               <span className="font-display text-4xl text-charcoal md:text-6xl">{s.value}</span>
@@ -187,7 +187,7 @@ function StudioPage() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="px-6 py-20 md:px-12 md:py-32">
+      <section className="px-6 py-14 md:px-12 md:py-32">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <p className="text-eyebrow text-bronze">(02) — Philosophy</p>
@@ -230,7 +230,7 @@ function StudioPage() {
       </section>
 
       {/* Process */}
-      <section className="bg-bone-deep px-6 py-24 md:px-12 md:py-36">
+      <section className="bg-bone-deep px-6 py-16 md:px-12 md:py-36">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
             <p className="text-eyebrow text-bronze">(03) — Process</p>
@@ -244,7 +244,7 @@ function StudioPage() {
             </p>
           </div>
 
-          <div className="mt-20 grid gap-8 md:grid-cols-2">
+          <div className="mt-12 grid gap-6 md:mt-20 md:grid-cols-2 md:gap-8">
             {PROCESS_STEPS.map((step, i) => {
               const Icon = step.icon;
               return (
@@ -276,8 +276,8 @@ function StudioPage() {
       </section>
 
       {/* Materials Library */}
-      <section className="px-6 py-24 md:px-12 md:py-36">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+      <section className="px-6 py-16 md:px-12 md:py-36">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
           <div className="lg:col-span-6">
             <RevealImage
               src={materialsImg}
@@ -298,7 +298,7 @@ function StudioPage() {
               Our K.P.H.B studio houses hundreds of stone samples, limewash tests, hand-loomed linens, and patinated
               metals. We study every combination under real daylight and warm evening lighting before anything goes to site.
             </p>
-            <div className="mt-8 grid grid-cols-2 gap-6 border-t border-border pt-6 text-sm">
+            <div className="mt-8 grid grid-cols-1 gap-5 border-t border-border pt-6 text-sm sm:grid-cols-2 sm:gap-6">
               <div>
                 <p className="font-medium text-charcoal">Travertine & Marble</p>
                 <p className="mt-1 text-xs text-muted-foreground">Hand-picked slabs from Indian and Italian quarries</p>
@@ -324,22 +324,23 @@ function StudioPage() {
       <MaterialAtelier />
 
       {/* Team */}
-      <section className="bg-bone-deep px-6 py-24 md:px-12 md:py-36">
+      <section className="bg-bone-deep px-6 py-16 md:px-12 md:py-36">
         <div>
           <p className="text-eyebrow text-bronze">(05) — Team</p>
           <RevealText
             as="h2"
             text="The people behind the studio."
-            className="text-display-lg mt-6"
+            className="text-display-lg mt-4 md:mt-6"
           />
-          <p className="mt-6 max-w-xl text-base text-muted-foreground">
+          <p className="mt-4 max-w-xl text-sm text-muted-foreground md:mt-6 md:text-base">
             Architects, interior designers, material researchers, and stylists working together on every detail.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Horizontal snap swipe strip on phones (< sm), standard 2/4-col grid on sm+/lg+ */}
+        <div className="no-scrollbar -mx-6 mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 sm:mx-0 sm:mt-16 sm:grid sm:grid-cols-2 sm:gap-10 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
           {TEAM.map((member) => (
-            <div key={member.name} className="group">
+            <div key={member.name} className="group w-[72vw] max-w-[290px] shrink-0 snap-center sm:w-auto sm:max-w-none">
               <div className="overflow-hidden bg-charcoal">
                 <img
                   src={member.image}
@@ -388,7 +389,7 @@ function StudioPage() {
         </p>
         <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
           <PillLink to="/contact" variant="solid">Book a consultation</PillLink>
-          <PillLink to="/projects" variant="light">View portfolio</PillLink>
+          <PillLink to="/projects" variant="outline">View portfolio</PillLink>
         </div>
       </section>
     </main>

@@ -45,9 +45,9 @@ export function Nav() {
           hidden && !open && "-translate-y-full",
         )}
       >
-        <nav className="flex items-center justify-between px-6 py-6 md:px-12" aria-label="Main">
+        <nav className="flex items-center justify-between px-5 py-4 md:px-12 md:py-6" aria-label="Main">
           <TransitionLink to="/" className="group flex items-baseline gap-2" aria-label="Brunst Interiors home">
-            <span className="font-display text-3xl font-light tracking-tight">Brunst</span>
+            <span className="font-display text-2xl font-light tracking-tight md:text-3xl">Brunst</span>
             <span className="text-eyebrow opacity-70">Interiors</span>
           </TransitionLink>
 
@@ -80,30 +80,43 @@ export function Nav() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed inset-0 z-[65] flex flex-col justify-end bg-charcoal px-6 pb-12 text-bone md:hidden"
+            className="fixed inset-0 z-[65] flex flex-col justify-between overflow-y-auto bg-charcoal px-6 pb-8 pt-24 text-bone md:hidden"
             initial={{ clipPath: "inset(0% 0% 100% 0%)" }}
             animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
             exit={{ clipPath: "inset(0% 0% 100% 0%)" }}
-            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+            transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1] }}
           >
-            <ul className="space-y-2">
-              {LINKS.map((l, i) => (
-                <li key={l.to} className="overflow-hidden">
-                  <motion.div
-                    initial={{ y: "110%" }}
-                    animate={{ y: 0 }}
-                    exit={{ y: "110%" }}
-                    transition={{ duration: 0.7, delay: 0.25 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <TransitionLink to={l.to} className="flex items-baseline gap-4" onNavigate={() => setOpen(false)}>
-                      <span className="text-eyebrow text-bronze">{l.n}</span>
-                      <span className="text-display-lg">{l.label}</span>
-                    </TransitionLink>
-                  </motion.div>
-                </li>
-              ))}
+            <div aria-hidden />
+            <ul className="my-auto space-y-2 py-4">
+              {LINKS.map((l, i) => {
+                const active = pathname === l.to;
+                return (
+                  <li key={l.to} className="overflow-hidden">
+                    <motion.div
+                      initial={{ y: "110%" }}
+                      animate={{ y: 0 }}
+                      exit={{ y: "110%" }}
+                      transition={{ duration: 0.65, delay: 0.2 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <TransitionLink
+                        to={l.to}
+                        className={cn("flex items-baseline gap-4 py-1", active && "text-bronze-light")}
+                        onNavigate={() => setOpen(false)}
+                      >
+                        <span className="text-eyebrow text-bronze">{l.n}</span>
+                        <span className="text-display-lg">{l.label}</span>
+                      </TransitionLink>
+                    </motion.div>
+                  </li>
+                );
+              })}
             </ul>
-            <p className="mt-10 text-eyebrow text-bone/50">K.P.H.B, Hyderabad — hello@brunstinteriors.com</p>
+            <div className="border-t border-bone/15 pt-5 text-xs text-bone/60">
+              <p className="text-eyebrow text-bronze-light">K.P.H.B Colony, Hyderabad</p>
+              <a href="mailto:hello@brunstinteriors.com" className="mt-1 block text-bone/80">
+                hello@brunstinteriors.com
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -12,7 +12,7 @@ function Row({ reverse = false }: { reverse?: boolean }) {
             {items.map((s, i) => (
               <span key={`${k}-${i}`} className="flex items-center">
                 <span className={i % 2 ? "text-display-xl italic text-bronze" : "text-display-xl"}>{s}</span>
-                <span className="mx-8 font-display text-5xl text-bronze md:mx-14 md:text-7xl">✦</span>
+                <span className="mx-5 font-display text-3xl text-bronze md:mx-14 md:text-7xl">✦</span>
               </span>
             ))}
           </div>
@@ -51,9 +51,9 @@ export function ServicesMarquee() {
   });
 
   return (
-    <section ref={ref} className="overflow-hidden border-y border-border py-20 md:py-28" aria-label="Our services">
+    <section ref={ref} className="overflow-hidden border-y border-border py-14 md:py-28" aria-label="Our services">
       <h2 className="sr-only">Services: {SERVICES.join(", ")}</h2>
-      <p className="text-eyebrow mb-10 px-6 text-bronze md:px-12">(04) — What we do</p>
+      <p className="text-eyebrow mb-6 px-6 text-bronze md:mb-10 md:px-12">(04) — What we do</p>
       <Row />
       <Row reverse />
     </section>

@@ -177,16 +177,16 @@ function ContactPage() {
       return (
         <main className="bg-bone text-charcoal">
           {/* Header */}
-          <section className="px-6 pb-16 pt-40 md:px-12 md:pb-24 md:pt-52">
+          <section className="px-6 pb-12 pt-28 md:px-12 md:pb-24 md:pt-52">
             <div className="max-w-4xl">
               <p className="text-eyebrow text-bronze">(01) — Contact</p>
-              <h1 className="text-display-xl mt-6">
+              <h1 className="text-display-xl mt-4 md:mt-6">
                 <WordReveal text="Start a" play={ready} />
                 <br />
                 <WordReveal text="Conversation." play={ready} delay={0.15} className="italic text-bronze" />
               </h1>
               <motion.p
-                className="mt-10 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl"
+                className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:mt-10 md:text-xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={ready ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 1, delay: 0.3 }}
@@ -195,9 +195,9 @@ function ContactPage() {
               </motion.p>
             </div>
 
-            {/* Contact Cards */}
-            <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-lg border border-border bg-bone-deep p-6">
+            {/* Contact Cards — swipeable horizontal cards on mobile so the inquiry form arrives immediately */}
+            <div className="no-scrollbar -mx-6 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 sm:mx-0 sm:mt-16 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
+              <div className="w-[76vw] max-w-[300px] shrink-0 snap-center rounded-lg border border-border bg-bone-deep p-5 sm:w-auto sm:max-w-none sm:p-6">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal text-bone">
                   <MapPin className="h-4 w-4 text-bronze-light" />
                 </div>
@@ -214,12 +214,12 @@ function ContactPage() {
                 </a>
               </div>
 
-              <div className="rounded-lg border border-border bg-bone-deep p-6">
+              <div className="w-[76vw] max-w-[300px] shrink-0 snap-center rounded-lg border border-border bg-bone-deep p-5 sm:w-auto sm:max-w-none sm:p-6">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal text-bone">
                   <Mail className="h-4 w-4 text-bronze-light" />
                 </div>
                 <p className="text-eyebrow mt-4 text-bronze">Email</p>
-                <a href="mailto:hello@brunstinteriors.com" className="mt-1 block font-display text-xl text-charcoal hover:text-bronze">
+                <a href="mailto:hello@brunstinteriors.com" className="mt-1 block truncate font-display text-xl text-charcoal hover:text-bronze">
                   hello@brunstinteriors.com
                 </a>
                 <p className="mt-1 text-xs text-muted-foreground">New projects & general inquiries</p>
@@ -228,7 +228,7 @@ function ContactPage() {
                 </a>
               </div>
 
-              <div className="rounded-lg border border-border bg-bone-deep p-6">
+              <div className="w-[76vw] max-w-[300px] shrink-0 snap-center rounded-lg border border-border bg-bone-deep p-5 sm:w-auto sm:max-w-none sm:p-6">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal text-bone">
                   <Phone className="h-4 w-4 text-bronze-light" />
                 </div>
@@ -247,7 +247,7 @@ function ContactPage() {
                 </a>
               </div>
 
-              <div className="rounded-lg border border-border bg-bone-deep p-6">
+              <div className="w-[76vw] max-w-[300px] shrink-0 snap-center rounded-lg border border-border bg-bone-deep p-5 sm:w-auto sm:max-w-none sm:p-6">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-charcoal text-bone">
                   <Clock className="h-4 w-4 text-bronze-light" />
                 </div>
@@ -262,7 +262,7 @@ function ContactPage() {
           </section>
 
           {/* Project Inquiry Form */}
-          <section className="border-t border-border bg-bone-deep px-6 py-20 md:px-12 md:py-32">
+          <section className="border-t border-border bg-bone-deep px-6 py-16 md:px-12 md:py-32">
             <div className="mx-auto max-w-4xl">
               <div className="text-center">
                 <p className="text-eyebrow text-bronze">(02) — Project Inquiry</p>
@@ -276,7 +276,7 @@ function ContactPage() {
                 </p>
               </div>
 
-              <div className="mt-14 rounded-xl border border-border bg-bone p-8 shadow-sm md:p-12">
+              <div className="mt-10 rounded-xl border border-border bg-bone p-5 shadow-sm sm:p-8 md:mt-14 md:p-12">
                 <AnimatePresence mode="wait">
                   {submitted ? (
                     <motion.div
@@ -320,7 +320,7 @@ function ContactPage() {
                           >
                             Send another message
                           </button>
-                            <PillLink to="/projects" variant="light">
+                            <PillLink to="/projects" variant="outline">
                               Browse portfolio
                             </PillLink>
                         </div>
@@ -488,7 +488,7 @@ function ContactPage() {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="inline-flex items-center gap-2 rounded-full bg-charcoal px-8 py-3.5 text-xs uppercase tracking-widest text-bone transition-transform duration-300 hover:scale-[1.02] hover:bg-charcoal/90 active:scale-95 disabled:opacity-50"
+                          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-charcoal px-8 py-3.5 text-xs uppercase tracking-widest text-bone transition-transform duration-300 hover:scale-[1.02] hover:bg-charcoal/90 active:scale-95 disabled:opacity-50 sm:w-auto"
                         >
                           {isSubmitting ? (
                             <>
@@ -511,7 +511,7 @@ function ContactPage() {
           </section>
 
           {/* Frequently Asked Questions */}
-          <section className="px-6 py-24 md:px-12 md:py-36">
+          <section className="px-6 py-16 md:px-12 md:py-36">
             <div className="mx-auto max-w-3xl">
               <p className="text-eyebrow text-center text-bronze">(03) — FAQ</p>
               <RevealText
@@ -520,11 +520,11 @@ function ContactPage() {
                 className="text-display-md mx-auto mt-4 text-center"
               />
 
-              <div className="mt-14">
-                <Accordion type="single" collapsible className="w-full space-y-4">
+              <div className="mt-10 md:mt-14">
+                <Accordion type="single" collapsible className="w-full space-y-3 md:space-y-4">
                   {FAQS.map((faq, i) => (
-                    <AccordionItem key={i} value={`item-${i}`} className="rounded-lg border bg-bone-deep/50 px-6">
-                      <AccordionTrigger className="py-5 text-left font-display text-xl text-charcoal hover:no-underline">
+                    <AccordionItem key={i} value={`item-${i}`} className="rounded-lg border bg-bone-deep/50 px-4 sm:px-6">
+                      <AccordionTrigger className="py-4 text-left font-display text-lg text-charcoal hover:no-underline sm:py-5 sm:text-xl">
                         {faq.q}
                       </AccordionTrigger>
                       <AccordionContent className="pb-6 text-sm leading-relaxed text-muted-foreground">

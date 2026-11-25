@@ -142,13 +142,14 @@ return (
       style={{ overflowAnchor: "none" }}
       className="relative h-full overflow-y-auto overscroll-contain"
     >
-      <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-5 text-bone mix-blend-difference md:px-12">
-        <div className="flex items-center gap-4">
+      <div className="sticky top-0 z-20 flex items-center justify-between px-5 py-4 text-bone mix-blend-difference md:px-12 md:py-5">
+        <div className="flex items-center gap-3 md:gap-4">
           <span className="text-eyebrow">
-            {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} — {project.category}
+            {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+            <span className="hidden sm:inline"> — {project.category}</span>
           </span>
           {onPrev && (
-            <div className="hidden items-center gap-2 sm:flex">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <button
                 type="button"
                 onClick={onPrev}
@@ -209,8 +210,8 @@ return (
         </div>
       </section>
 
-      <section className="grid gap-12 px-6 py-24 md:grid-cols-12 md:px-12 md:py-32">
-        <dl className="grid grid-cols-2 gap-8 md:col-span-4 md:grid-cols-1">
+      <section className="grid gap-8 px-6 py-14 md:grid-cols-12 md:gap-12 md:px-12 md:py-32">
+        <dl className="grid grid-cols-2 gap-6 md:col-span-4 md:grid-cols-1 md:gap-8">
           {[
             ["Location", project.location],
             ["Year", project.year],
@@ -229,10 +230,10 @@ return (
         </div>
       </section>
 
-      <section className="px-6 pb-24 md:px-12 md:pb-32">
-        <div className="mb-8 flex items-end justify-between gap-6">
+      <section className="px-6 pb-16 md:px-12 md:pb-32">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-4 md:mb-8 md:gap-6">
           <h3 className="text-display-md">{simulated ? "Concept to reveal" : "Before & after"}</h3>
-          <p className="text-eyebrow max-w-[16rem] text-right text-muted-foreground">Drag the handle to compare</p>
+          <p className="text-eyebrow text-muted-foreground">Drag to compare</p>
         </div>
         <BeforeAfter
           before={project.before ?? project.cover}
@@ -254,7 +255,7 @@ return (
         }}
         data-cursor="view"
         data-cursor-label="Next"
-        className="group flex w-full items-end justify-between bg-charcoal px-6 py-20 text-left text-bone md:px-12 md:py-28"
+        className="group flex w-full items-end justify-between bg-charcoal px-6 py-14 text-left text-bone md:px-12 md:py-28"
       >
         <div>
           <p className="text-eyebrow text-bronze-light">Next project</p>

@@ -5,8 +5,8 @@ import { RevealImage } from "@/components/site/media";
 
 export function Philosophy() {
   return (
-    <section className="px-6 py-28 md:px-12 md:py-44">
-      <div className="grid gap-10 md:grid-cols-12">
+    <section className="px-6 py-16 md:px-12 md:py-44">
+      <div className="grid gap-6 md:grid-cols-12 md:gap-10">
         <p className="text-eyebrow text-bronze md:col-span-3">(01) — Philosophy</p>
         <ScrubWords
           className="text-display-md md:col-span-9"
@@ -14,7 +14,7 @@ export function Philosophy() {
         />
       </div>
 
-      <div className="mt-24 grid gap-6 md:mt-40 md:grid-cols-12 md:gap-8">
+      <div className="mt-14 grid gap-8 md:mt-40 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-7">
           <RevealImage src={kitchen} alt="Travertine kitchen island with smoked oak joinery" className="aspect-[4/5] md:aspect-[5/6]" from="center" view />
           <div className="mt-4 flex justify-between text-eyebrow text-muted-foreground">

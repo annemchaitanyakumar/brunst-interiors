@@ -8,16 +8,16 @@ const PICKS = [PROJECTS[5], PROJECTS[2], PROJECTS[7]].filter((p): p is (typeof P
 
 export function SelectedWorks() {
   return (
-    <section className="px-6 py-28 md:px-12 md:py-44">
-      <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+    <section className="px-6 py-16 md:px-12 md:py-44">
+      <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end md:gap-8">
         <div>
           <p className="text-eyebrow text-bronze">(05) — Selected works</p>
-          <RevealText as="h2" className="text-display-lg mt-6 max-w-[12ch]" text="Every room, a different story." />
+          <RevealText as="h2" className="text-display-lg mt-4 max-w-[12ch] md:mt-6" text="Every room, a different story." />
         </div>
         <PillLink to="/projects" variant="solid">Explore all projects</PillLink>
       </div>
 
-      <div className="mt-20 grid gap-10 md:grid-cols-3 md:gap-8">
+      <div className="mt-12 grid gap-12 md:mt-20 md:grid-cols-3 md:gap-8">
         {PICKS.map((p, i) => (
             <TransitionLink
               key={p.slug}

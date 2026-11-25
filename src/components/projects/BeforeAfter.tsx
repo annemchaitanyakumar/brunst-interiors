@@ -32,12 +32,12 @@ export function BeforeAfter({
         style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
       />
       <div className="pointer-events-none absolute inset-y-0 w-px bg-bone" style={{ left: `${pos}%` }}>
-        <div className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-bone/70 bg-charcoal/40 text-bone backdrop-blur-md">
+        <div className="absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-bone/70 bg-charcoal/50 text-bone backdrop-blur-md md:h-16 md:w-16">
           <span className="text-eyebrow">⟷</span>
         </div>
       </div>
-      <span className="text-eyebrow absolute left-4 top-4 rounded-full bg-charcoal/50 px-3 py-1.5 text-bone backdrop-blur">{beforeLabel}</span>
-      <span className="text-eyebrow absolute right-4 top-4 rounded-full bg-charcoal/50 px-3 py-1.5 text-bone backdrop-blur">{afterLabel}</span>
+      <span className="text-eyebrow absolute left-3 top-3 rounded-full bg-charcoal/60 px-2.5 py-1 text-[9px] text-bone backdrop-blur md:left-4 md:top-4 md:px-3 md:py-1.5 md:text-[0.7rem]">{beforeLabel}</span>
+      <span className="text-eyebrow absolute right-3 top-3 rounded-full bg-charcoal/60 px-2.5 py-1 text-[9px] text-bone backdrop-blur md:right-4 md:top-4 md:px-3 md:py-1.5 md:text-[0.7rem]">{afterLabel}</span>
       <input
         type="range"
         min={0}

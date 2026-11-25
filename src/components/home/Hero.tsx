@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
-import { Play, Pause } from "lucide-react";
 import { gsap, useGsap } from "@/lib/motion";
 import { useSite } from "@/components/site/site-context";
 import { LetterReveal } from "@/components/site/text";
@@ -11,47 +10,21 @@ export function Hero() {
   const { ready } = useSite();
   const reduce = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     if (reduce) {
       v.pause();
-      setIsPlaying(false);
     } else {
       try {
         const p = v.play();
-        if (p && typeof p.then === "function") {
-          p.then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
-        } else {
-          setIsPlaying(true);
-        }
+        if (p && typeof p.catch === "function") p.catch(() => { });
       } catch {
-        setIsPlaying(false);
+        // Ignore autoplay restrictions cleanly
       }
     }
   }, [reduce]);
-
-  const togglePlayback = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    if (v.paused) {
-      try {
-        const p = v.play();
-        if (p && typeof p.then === "function") {
-          p.then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
-        } else {
-          setIsPlaying(true);
-        }
-      } catch {
-        setIsPlaying(false);
-      }
-    } else {
-      v.pause();
-      setIsPlaying(false);
-    }
-  };
 
   const ref = useGsap<HTMLElement>((root) => {
     const tl = gsap.timeline({
@@ -94,9 +67,9 @@ export function Hero() {
         <div className="absolute inset-0 veil-hero pointer-events-none" />
       </div>
 
-      <div data-hero-content className="pointer-events-none relative z-10 flex h-full flex-col justify-end px-6 pb-10 text-bone md:px-12 md:pb-14">
+      <div data-hero-content className="pointer-events-none relative z-10 flex h-full flex-col justify-end px-5 pb-8 pt-24 text-bone md:px-12 md:pb-14">
         <motion.p
-          className="text-eyebrow mb-6 text-bone/70 pointer-events-auto"
+          className="text-eyebrow mb-3 text-bone/70 pointer-events-auto md:mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={ready ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.2 }}
@@ -110,7 +83,7 @@ export function Hero() {
         </h1>
 
         <motion.div
-          className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between pointer-events-auto"
+          className="mt-6 flex flex-col gap-5 md:mt-10 md:flex-row md:items-end md:justify-between md:gap-8 pointer-events-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={ready ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.2, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
@@ -118,22 +91,7 @@ export function Hero() {
           <p className="max-w-sm text-sm leading-relaxed text-bone/75">
             Interiors directed like cinema — light, material and silence composed into homes and spaces you feel before you see.
           </p>
-          <div className="flex flex-wrap items-center gap-4 md:gap-6">
-            <button
-              type="button"
-              onClick={togglePlayback}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-bone/25 bg-charcoal/40 text-bone/80 backdrop-blur-md transition-colors hover:border-bone hover:text-bone"
-              aria-label={isPlaying ? "Pause background video" : "Play background video"}
-              data-cursor="hover"
-            >
-              {isPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-            </button>
-            <div className="hidden items-center gap-3 md:flex" aria-hidden>
-              <span className="text-eyebrow text-bone/60">Scroll</span>
-              <span className="relative block h-12 w-px overflow-hidden bg-bone/20">
-                <span className="absolute inset-0 animate-scroll-cue bg-bone" />
-              </span>
-            </div>
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 md:gap-5">
             <PillLink to="/tour" variant="bronze">3D House Tour</PillLink>
             <PillLink to="/projects" variant="light">View the portfolio</PillLink>
           </div>
