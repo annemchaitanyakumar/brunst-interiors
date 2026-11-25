@@ -8,12 +8,14 @@ import { CaseStudy } from "@/components/projects/CaseStudy";
 import { routeTree } from "@/routeTree.gen";
 
 describe("App routing", () => {
-  it("matches a page for / instead of falling back to not found", () => {
+  it("matches a page for / and /tour instead of falling back to not found", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
 
-    const matches = router.matchRoutes("/");
+    const homeMatches = router.matchRoutes("/");
+    const tourMatches = router.matchRoutes("/tour");
 
-    expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
+    expect(homeMatches.at(-1)?.routeId).not.toBe(rootRouteId);
+    expect(tourMatches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
 
   it("renders CaseStudy directly for hotel-ombre", () => {

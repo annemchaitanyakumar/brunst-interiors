@@ -8,10 +8,9 @@ import {
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { MotionConfig } from "framer-motion";
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteProvider } from "@/components/site/site-context";
 import { SmoothScroll } from "@/components/site/SmoothScroll";
 import { Preloader } from "@/components/site/Preloader";
@@ -38,9 +37,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   const errorMessage = error instanceof Error ? error.message : typeof error === "string" ? error : "";
 
@@ -93,7 +89,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap",
       },
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,

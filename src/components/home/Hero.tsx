@@ -118,7 +118,7 @@ export function Hero() {
           <p className="max-w-sm text-sm leading-relaxed text-bone/75">
             Interiors directed like cinema — light, material and silence composed into homes and spaces you feel before you see.
           </p>
-          <div className="flex items-center gap-6 md:gap-8">
+          <div className="flex flex-wrap items-center gap-4 md:gap-6">
             <button
               type="button"
               onClick={togglePlayback}
@@ -134,6 +134,7 @@ export function Hero() {
                 <span className="absolute inset-0 animate-scroll-cue bg-bone" />
               </span>
             </div>
+            <PillLink to="/tour" variant="bronze">3D House Tour</PillLink>
             <PillLink to="/projects" variant="light">View the portfolio</PillLink>
           </div>
         </motion.div>

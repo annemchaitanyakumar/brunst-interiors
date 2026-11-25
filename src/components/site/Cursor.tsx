@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { gsap, canHover } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 type Mode = "default" | "hover" | "view";
 
-/** Custom cursor: a dot + trailing ring that expands into a "View" disc over images. */
+/** Custom cursor: a dot + trailing ring that expands into a "View" disc over images. Disabled on /tour for instant native 3D pointer accuracy. */
 export function Cursor() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isTour = pathname.startsWith("/tour");
   const [enabled, setEnabled] = useState(false);
   const [mode, setMode] = useState<Mode>("default");
   const [label, setLabel] = useState("View");
@@ -14,14 +17,18 @@ export function Cursor() {
   const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!canHover()) return;
+    if (isTour || !canHover()) {
+      setEnabled(false);
+      document.documentElement.classList.remove("has-cursor");
+      return;
+    }
     setEnabled(true);
     document.documentElement.classList.add("has-cursor");
     return () => document.documentElement.classList.remove("has-cursor");
-  }, []);
+  }, [isTour]);
 
   useEffect(() => {
-    if (!enabled || !dotRef.current || !ringRef.current) return;
+    if (isTour || !enabled || !dotRef.current || !ringRef.current) return;
     gsap.set([dotRef.current, ringRef.current], { xPercent: -50, yPercent: -50 });
     const xDot = gsap.quickTo(dotRef.current, "x", { duration: 0.1, ease: "power3" });
     const yDot = gsap.quickTo(dotRef.current, "y", { duration: 0.1, ease: "power3" });
@@ -54,9 +61,9 @@ export function Cursor() {
       document.removeEventListener("pointerover", over);
       document.documentElement.removeEventListener("pointerleave", leave);
     };
-  }, [enabled]);
+  }, [enabled, isTour]);
 
-  if (!enabled) return null;
+  if (!enabled || isTour) return null;
 
   return (
     <div aria-hidden className={cn("transition-opacity duration-300", visible ? "opacity-100" : "opacity-0")}>

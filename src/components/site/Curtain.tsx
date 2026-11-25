@@ -3,11 +3,12 @@ import { Link, useRouter, useRouterState } from "@tanstack/react-router";
 import { gsap, ScrollTrigger, lenisStore, prefersReducedMotion } from "@/lib/motion";
 import { useSite } from "./site-context";
 
-export type SiteRoute = "/" | "/projects" | "/studio" | "/contact";
+export type SiteRoute = "/" | "/projects" | "/tour" | "/studio" | "/contact";
 
 const LABELS: Record<SiteRoute, string> = {
   "/": "Home",
   "/projects": "Projects",
+  "/tour": "3D House Tour",
   "/studio": "Studio",
   "/contact": "Contact",
 };

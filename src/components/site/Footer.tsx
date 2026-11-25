@@ -49,6 +49,7 @@ export function Footer() {
             <p className="text-eyebrow mb-4 text-bone/40">Explore</p>
             <ul className="space-y-1">
               <li><TransitionLink to="/projects" className="link-underline">Projects</TransitionLink></li>
+              <li><TransitionLink to="/tour" className="link-underline">3D House Tour</TransitionLink></li>
               <li><TransitionLink to="/studio" className="link-underline">Studio</TransitionLink></li>
               <li><TransitionLink to="/contact" className="link-underline">Contact</TransitionLink></li>
             </ul>

@@ -9,8 +9,9 @@ import { Magnetic } from "./Magnetic";
 const LINKS: { to: SiteRoute; label: string; n: string }[] = [
   { to: "/", label: "Home", n: "01" },
   { to: "/projects", label: "Projects", n: "02" },
-  { to: "/studio", label: "Studio", n: "03" },
-  { to: "/contact", label: "Contact", n: "04" },
+  { to: "/tour", label: "3D Tour", n: "03" },
+  { to: "/studio", label: "Studio", n: "04" },
+  { to: "/contact", label: "Contact", n: "05" },
 ];
 
 export function Nav() {
